@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;600;700&family=Poppins:wght@300;500;700;800&display=swap");
+
+/*
+ font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif; 
+
+OpenSans = 500, 600, 700
+Poppins = 300, 500, 700, 800
+
+*/
+:root {
+  --purple: #640062;
+  --tomato: #fd3a1e;
+  --yellow: #feea00;
+  --grey1: #6c6c6c;
+  --light: #f1f1f1;
+  --dark: #323232;
+}
+
+.chart {
+  width: 50%;
+}

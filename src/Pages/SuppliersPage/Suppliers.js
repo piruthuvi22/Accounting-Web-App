@@ -146,7 +146,7 @@ const SuppliersPage = () => {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">Supplier Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Address</th>
                   <th scope="col">TP No</th>

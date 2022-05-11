@@ -5,7 +5,7 @@ import outlineShoppingCart from "@iconify/icons-ic/outline-shopping-cart";
 import baselinePeopleOutline from "@iconify/icons-ic/baseline-people-outline";
 import roundShoppingCartCheckout from "@iconify/icons-ic/round-shopping-cart-checkout";
 import baselineAttachMoney from "@iconify/icons-ic/baseline-attach-money";
-import outlineCategory from '@iconify/icons-ic/outline-category';
+import outlineCategory from "@iconify/icons-ic/outline-category";
 
 import { NavLink, Router, Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <a href="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           <img
             src="/logo3.png" // src="https://api.mygermanuniversity.com/images/university_logos/67c6a1e7ce56d3d6fa748ab6d9af3fd7_mzbYiuK8X2nk1568707186.png"
             alt=""
@@ -23,7 +23,7 @@ const NavBar = () => {
             // height="50"
           />
           &nbsp; Ledger-ndary
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler shadow-none"
@@ -42,15 +42,15 @@ const NavBar = () => {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link  text-white d-flex align-items-center"
                 aria-current="page"
-                href="/"
+                to="/"
               >
                 <Icon icon={outlineSpaceDashboard} width="26" height="26" />
                 &nbsp;
                 <span>Dashboard</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/products">

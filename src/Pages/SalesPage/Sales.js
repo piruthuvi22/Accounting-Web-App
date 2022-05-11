@@ -50,7 +50,7 @@ const SalesPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`http://localhost:5000/sales/delete-sale/${id}`)
+              .delete(`https://accouting-uom.herokuapp.com/sales/delete-sale/${id}`)
               .then((response) => {
                 console.log(response);
                 getSales();

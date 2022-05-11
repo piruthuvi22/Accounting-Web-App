@@ -21,7 +21,7 @@ const SuppliersPage = () => {
 
   const getSuppliers = () => {
     axios
-      .get("http://localhost:5000/suppliers/get-suppliers")
+      .get("https://accouting-uom.herokuapp.com/suppliers/get-suppliers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -51,7 +51,7 @@ const SuppliersPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`http://localhost:5000/suppliers/delete-supplier/${id}`)
+              .delete(`https://accouting-uom.herokuapp.com/suppliers/delete-supplier/${id}`)
               .then((response) => {
                 console.log(response);
                 getSuppliers();

@@ -21,7 +21,7 @@ const CustomersPage = () => {
 
   const getCustomers = () => {
     axios
-      .get("http://localhost:5000/customers/get-customers")
+      .get("https://accouting-uom.herokuapp.com/customers/get-customers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -51,7 +51,7 @@ const CustomersPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`http://localhost:5000/customers/delete-customer/${id}`)
+              .delete(`https://accouting-uom.herokuapp.com/customers/delete-customer/${id}`)
               .then((response) => {
                 console.log(response);
                 getCustomers();

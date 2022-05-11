@@ -51,7 +51,7 @@ const PurchasesPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`http://localhost:5000/purchases/delete-purchase/${id}`)
+              .delete(`https://accouting-uom.herokuapp.com/purchases/delete-purchase/${id}`)
               .then((response) => {
                 console.log(response);
                 getPurchases();

@@ -24,7 +24,7 @@ const Card = ({ totalAmount, type }) => {
               <h1 className="card-title text-danger d-inline">
                 <CountUp
                   start={0}
-                  end={123456}
+                  end={totalAmount}
                   duration={2}
                   separator=","
                   delay={0.5}

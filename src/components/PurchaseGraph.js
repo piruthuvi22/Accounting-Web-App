@@ -47,7 +47,7 @@ const PurchaseGraph = () => {
   useEffect(() => {
     console.log("1st useEffec");
     axios
-      .get("http://localhost:5000/purchases/get-purchases")
+      .get("https://accouting-uom.herokuapp.com/purchases/get-purchases")
       .then((response) => {
         setData(response.data);
       })
@@ -79,7 +79,7 @@ const PurchaseGraph = () => {
       },
     ],
   };
-  console.log("data", dataSet);
+  console.log("data", data);
 
   return (
     <>

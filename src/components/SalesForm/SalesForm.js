@@ -65,7 +65,7 @@ const SalesForm = ({ getSales }) => {
   const handleProductChange = (e) => {
     console.log(e.target.value);
     axios
-      .get(`http://localhost:5000/products/get-product-data/${e.target.value}`)
+      .get(`https://accouting-uom.herokuapp.com/products/get-product-data/${e.target.value}`)
       .then((response) => {
         console.log(response.data);
         setUnitPrice(response.data[0].UnitPrice);
@@ -96,7 +96,7 @@ const SalesForm = ({ getSales }) => {
       // TotalValue: req_body.TotalValue,
     };
     axios
-      .post("http://localhost:5000/sales/add-sale", payload, {
+      .post("https://accouting-uom.herokuapp.com/sales/add-sale", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

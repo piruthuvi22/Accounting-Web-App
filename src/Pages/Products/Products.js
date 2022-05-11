@@ -140,7 +140,7 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="m-3 mt-5 h-100">
+      <div className="m-3 mt-5 h-100 overflow-auto">
         {isLoaded ? (
           data.length > 0 ? (
             <table className="table table-hover">

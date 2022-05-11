@@ -92,7 +92,7 @@ const PurchasesPage = () => {
           <td>{purchase.Quantity}</td>
           <td>{purchase.UnitPrice}</td>
           <td>{purchase.Value}</td>
-          <td className="fw-bold h3 text-success p-0">
+          <td className="fw-bold h4 text-success p-0 text-decoration-underline">
             {data.length - 1 == i && totalAmount + " LKR"}
           </td>
           <td className="text-danger">
@@ -149,7 +149,7 @@ const PurchasesPage = () => {
         </div>
       </div>
 
-      <div className="m-3 mt-2">
+      <div className="m-3 mt-2 overflow-auto">
         {isLoaded ? (
           data.length > 0 ? (
             <table className="table table-hover table-bordered">

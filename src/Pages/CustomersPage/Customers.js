@@ -139,7 +139,7 @@ const CustomersPage = () => {
         </div>
       </div>
 
-      <div className="m-3 mt-5">
+      <div className="m-3 mt-5 overflow-auto" >
         {isLoaded ? (
           data.length > 0 ? (
             <table className="table table-hover">

@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
-
+import JsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import SalesForm from "../../components/SalesForm/SalesForm";
 
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
@@ -50,7 +51,9 @@ const SalesPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`https://accouting-uom.herokuapp.com/sales/delete-sale/${id}`)
+              .delete(
+                `https://accouting-uom.herokuapp.com/sales/delete-sale/${id}`
+              )
               .then((response) => {
                 console.log(response);
                 getSales();
@@ -91,7 +94,7 @@ const SalesPage = () => {
           <td>{sale.Quantity}</td>
           <td>{sale.UnitPrice}</td>
           <td>{sale.Value}</td>
-          <td className="fw-bold h3 text-success p-0">
+          <td className="fw-bold h4 text-success p-0 text-decoration-underline">
             {data.length - 1 == i && totalAmount + " LKR"}
           </td>
           <td className="text-danger">
@@ -116,6 +119,24 @@ const SalesPage = () => {
         </tr>
       );
     });
+  };
+
+  const handleExportPDF = () => {
+    console.log("pdf");
+
+    // const report = new JsPDF("landscape", "pt", "a2");
+    // report.html(document.querySelector("#report")).then(() => {
+    //   report.save("report.pdf");
+    // });
+
+    // const input = document.getElementById("report");
+    // html2canvas(input).then((canvas) => {
+    //   const imgData = canvas.toDataURL("image/png");
+    //   const pdf = new JsPDF();
+    //   pdf.addImage(imgData, "JPEG", 0, 0);
+    //   // pdf.output('dataurlnewwindow');
+    //   pdf.save("download.pdf");
+    // });
   };
   console.log("sales page", data.length);
   return (
@@ -148,40 +169,55 @@ const SalesPage = () => {
         </div>
       </div>
 
-      <div className="m-3 mt-2">
+      <div className="m-3 mt-1 overflow-auto">
         {isLoaded ? (
           data.length > 0 ? (
-            <table className="table table-hover table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col" rowSpan="2">
-                    #Invoice
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Date
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Customer
-                  </th>
-                  <th scope="col" colSpan="4" className="text">
-                    Description of Goods
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Total Amount
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Action
-                  </th>
-                </tr>
-                <tr>
-                  <th scope="col">Product</th>
-                  <th scope="col">Qty</th>
-                  <th scope="col">Unit Price</th>
-                  <th scope="col">Value</th>
-                </tr>
-              </thead>
-              <tbody>{renderTable()}</tbody>
-            </table>
+            <>
+              {/* <div className="d-flex justify-content-end my-1">
+                <button
+                  type="button"
+                  className="btn btn-outline-danger"
+                  onClick={handleExportPDF}
+                >
+                  Export
+                </button>
+              </div> */}
+              <div id="report">
+                {/* <h3 className="visualy-hidden text-center">Sales Journal</h3> */}
+                <table className="table table-hover table-bordered">
+                  {/* <caption>Sales Journal</caption> */}
+                  <thead>
+                    <tr>
+                      <th scope="col" rowSpan="2">
+                        #Invoice
+                      </th>
+                      <th scope="col" rowSpan="2">
+                        Date
+                      </th>
+                      <th scope="col" rowSpan="2">
+                        Customer
+                      </th>
+                      <th scope="col" colSpan="4" className="text">
+                        Description of Goods
+                      </th>
+                      <th scope="col" rowSpan="2">
+                        Total Amount
+                      </th>
+                      <th scope="col" rowSpan="2">
+                        Action
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Qty</th>
+                      <th scope="col">Unit Price</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>{renderTable()}</tbody>
+                </table>
+              </div>
+            </>
           ) : (
             <div className="text-center">
               <h2 className="text-muted">No Sales found</h2>

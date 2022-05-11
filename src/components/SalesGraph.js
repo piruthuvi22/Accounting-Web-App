@@ -79,7 +79,9 @@ const SalesGraph = () => {
   return (
     <>
       <Bar options={options} data={dataSet} className="chart" />
-      <Card totalAmount={totalAmount} type="sales" />
+      <div className="d-flex justify-content-center">
+        <Card totalAmount={totalAmount} type="sales" />
+      </div>
     </>
   );
 };

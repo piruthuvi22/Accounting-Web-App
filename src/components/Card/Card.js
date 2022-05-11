@@ -8,16 +8,16 @@ import baselineArrowRight from "@iconify/icons-ic/baseline-arrow-right";
 
 const Card = ({ totalAmount, type }) => {
   return (
-    <div className="card" style={{ maxWidth: "340px" }}>
-      <div className="row g-0">
-        <div className="col-md-4 d-flex align-items-center justify-content-center">
+    <div className="card w-100" style={{ maxWidth: "340px" }}>
+      <div className="row m-0 g-0 w-100">
+        <div className="col-4 d-flex align-items-center justify-content-center p-0">
           <img
-            src={type == "sales" ? "/sales.png" : "/purchases.png"}
-            className="img-fluid rounded-start card-img"
+            src={type == "sales" ? "/sales.svg" : "/purchase.svg"}
+            className="img-fluid rounded-start card-img p-1"
             alt="..."
           />
         </div>
-        <div className="col-md-8">
+        <div className="col-8">
           <div className="card-body">
             <h5 className="card-title text-capitalize">Total {type}</h5>
             <div className="">
@@ -31,7 +31,7 @@ const Card = ({ totalAmount, type }) => {
                   useEasing={true}
                 />
               </h1>
-              <h4 className="d-inline text-muted">LKR</h4>
+              <h4 className="d-inline lkr text-muted">LKR</h4>
             </div>
 
             {/* <p className="card-text">

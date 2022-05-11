@@ -47,42 +47,42 @@ const NavBar = () => {
                 aria-current="page"
                 to="/"
               >
-                <Icon icon={outlineSpaceDashboard} width="26" height="26" />
+                <Icon icon={outlineSpaceDashboard} className="nav-icon" />
                 &nbsp;
                 <span>Dashboard</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/products">
-                <Icon icon={outlineShoppingCart} width="26" height="26" />
+                <Icon icon={outlineShoppingCart} className="nav-icon" />
                 &nbsp;
                 <span>Products</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/customers">
-                <Icon icon={baselinePeopleOutline} width="26" height="26" />
+                <Icon icon={baselinePeopleOutline} className="nav-icon" />
                 &nbsp;
                 <span>Customers</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/suppliers">
-                <Icon icon={outlineCategory} width="26" height="26" />
+                <Icon icon={outlineCategory} className="nav-icon" />
                 &nbsp;
                 <span>Suppliers</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/purchases">
-                <Icon icon={roundShoppingCartCheckout} width="26" height="26" />
+                <Icon icon={roundShoppingCartCheckout} className="nav-icon" />
                 &nbsp;
                 <span>Purchases</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" to="/sales">
-                <Icon icon={baselineAttachMoney} width="26" height="26" />
+                <Icon icon={baselineAttachMoney} className="nav-icon" />
                 &nbsp;
                 <span>Sales</span>
               </Link>

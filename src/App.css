@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;600;700&family=Poppins:wght@300;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600;700&family=Poppins:wght@200;300;500;700;800&display=swap");
 
 /*
  font-family: 'Open Sans', sans-serif;
@@ -9,7 +9,7 @@ Poppins = 300, 500, 700, 800
 
 */
 :root {
-  --purple: #640062;
+  --purple: #7952b3;
   --tomato: #fd3a1e;
   --yellow: #feea00;
   --grey1: #6c6c6c;
@@ -17,6 +17,21 @@ Poppins = 300, 500, 700, 800
   --dark: #323232;
 }
 
+body {
+  font-family: "Poppins", "Open Sans", sans-serif !important;
+}
 .chart {
-  width: 50%;
+  max-width: 90%;
+}
+
+.card-img {
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+th,td {
+  /* border: 1px solid #000 !important; */
+  text-align: center !important;
+  vertical-align: middle;
 }

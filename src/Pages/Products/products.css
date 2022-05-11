@@ -1,0 +1,23 @@
+:root {
+  --purple: #7952b3;
+  --tomato: #2aecd5;
+  --yellow: #feea00;
+  --grey1: #6c6c6c;
+  --light: #f1f1f1;
+  --dark: #323232;
+}
+
+.accordion hr {
+  margin: 0;
+  border: 1px solid var(--grey1);
+}
+
+.accordion .accordion-button {
+  border-bottom: 2px solid var(--light);
+}
+
+.accordion .accordion-button {
+  background-color: var(--tomato);
+  background-color: #e2e2e2;
+  color: #5A2675;
+}

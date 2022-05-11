@@ -1,0 +1,11 @@
+.navbar {
+  background-color: #5a2675;
+}
+.nav-link{
+  text-transform: uppercase;
+  /* letter-spacing:2px; */
+}
+
+.nav-item{
+  padding:0 5px;
+}

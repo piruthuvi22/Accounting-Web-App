@@ -3,25 +3,25 @@ import axios from "axios";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
-import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
 
-import PurchaseForm from "../../components/PurchasesForm/PurchasesForm";
+import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
+import ProductsForm from "../../components/ProductsForm/ProductsForm";
 
-import "./purchases.css";
+import "./products.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-const PurchasesPage = () => {
+const Products = () => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    getPurchases();
+    getProducts();
   }, []);
 
-  const getPurchases = () => {
+  const getProducts = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/purchases/get-purchases")
+      .get("https://accouting-uom.herokuapp.com/products/get-products")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -29,6 +29,7 @@ const PurchasesPage = () => {
       .catch((error) => {
         console.log(error);
         setIsLoaded(true);
+
         toast.error("Something went wrong!", {
           position: "top-right",
           autoClose: 4000,
@@ -51,10 +52,10 @@ const PurchasesPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`http://localhost:5000/purchases/delete-purchase/${id}`)
+              .delete(`https://accouting-uom.herokuapp.com/products/delete-product/${id}`)
               .then((response) => {
                 console.log(response);
-                getPurchases();
+                getProducts();
               })
               .catch((error) => {
                 console.log(error);
@@ -77,28 +78,18 @@ const PurchasesPage = () => {
     });
   };
   const renderTable = () => {
-    let totalAmount = 0;
-    return data.reverse().map((purchase, i) => {
-      totalAmount += parseFloat(purchase.Value);
+    return data.reverse().map((product, i) => {
       return (
-        <tr key={purchase._id}>
-          <th scope="row">
-            {/* {purchase._id} */}
-            {purchase._id.substr(0, 5) + "..." + purchase._id.substr(19)}
-          </th>
-          <td>{purchase.Date.substr(0, 10)}</td>
-          <td>{purchase.Supplier}</td>
-          <td>{purchase.Description}</td>
-          <td>{purchase.Quantity}</td>
-          <td>{purchase.UnitPrice}</td>
-          <td>{purchase.Value}</td>
-          <td className="fw-bold h3 text-success p-0">
-            {data.length - 1 == i && totalAmount + " LKR"}
-          </td>
+        <tr key={product._id}>
+          <th scope="row">{product._id}</th>
+          <td>{product.Product}</td>
+          <td>{product.Date}</td>
+          <td>{product.Supplier}</td>
+          <td>{product.UnitPrice}</td>
           <td className="text-danger">
             {/* <u 
               className="edit text-primary"
-                onClick={() => handleEdit(purchase._id)}
+                onClick={() => handleEdit(product._id)}
             >
               Edit
             </u> */}
@@ -109,7 +100,7 @@ const PurchasesPage = () => {
                 width="26"
                 height="26"
                 className="text-danger"
-                onClick={() => handleDelete(purchase._id)}
+                onClick={() => handleDelete(product._id)}
                 style={{ cursor: "pointer" }}
               />
             </span>
@@ -118,7 +109,7 @@ const PurchasesPage = () => {
       );
     });
   };
-  console.log("purchase page", data.length);
+  console.log("Product page", data.length);
   return (
     <>
       <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -132,7 +123,7 @@ const PurchasesPage = () => {
               aria-expanded="false"
               aria-controls="flush-collapseOne"
             >
-              Add New Purchase
+              Add Products
             </button>
             <hr />
           </h2>
@@ -143,49 +134,31 @@ const PurchasesPage = () => {
             data-bs-parent="#accordionFlushExample"
           >
             <div className="accordion-body">
-              <PurchaseForm getPurchases={getPurchases} />
+              <ProductsForm getProducts={getProducts} />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="m-3 mt-2">
+      <div className="m-3 mt-5 h-100">
         {isLoaded ? (
           data.length > 0 ? (
-            <table className="table table-hover table-bordered">
+            <table className="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col" rowSpan="2">
-                    #Invoice
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Date
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Supplier
-                  </th>
-                  <th scope="col" colSpan="4" className="text">
-                    Description of Goods
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Total Amount
-                  </th>
-                  <th scope="col" rowSpan="2">
-                    Action
-                  </th>
-                </tr>
-                <tr>
+                  <th scope="col">#</th>
                   <th scope="col">Product</th>
-                  <th scope="col">Qty</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Supplier</th>
                   <th scope="col">Unit Price</th>
-                  <th scope="col">Value</th>
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>{renderTable()}</tbody>
             </table>
           ) : (
             <div className="text-center">
-              <h2 className="text-muted">No Purchases found</h2>
+              <h2 className="text-muted">No Products found</h2>
               <lord-icon
                 src="https://cdn.lordicon.com/biwxmlnf.json"
                 trigger="loop"
@@ -203,9 +176,11 @@ const PurchasesPage = () => {
             &nbsp;&nbsp;&nbsp;&nbsp;<h5 className="text-muted">Loading...</h5>
           </div>
         )}
+
+        {/* {} */}
       </div>
     </>
   );
 };
 
-export default PurchasesPage;
+export default Products;

@@ -15,7 +15,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <a href="/dashboard" className="navbar-brand">
+        <a href="/" className="navbar-brand">
           <img
             src="/logo3.png" // src="https://api.mygermanuniversity.com/images/university_logos/67c6a1e7ce56d3d6fa748ab6d9af3fd7_mzbYiuK8X2nk1568707186.png"
             alt=""
@@ -45,7 +45,7 @@ const NavBar = () => {
               <a
                 className="nav-link  text-white d-flex align-items-center"
                 aria-current="page"
-                href="/dashboard"
+                href="/"
               >
                 <Icon icon={outlineSpaceDashboard} width="26" height="26" />
                 &nbsp;

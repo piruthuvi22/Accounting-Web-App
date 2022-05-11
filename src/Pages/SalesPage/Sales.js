@@ -233,7 +233,7 @@ const SalesPage = () => {
             </div>
           )
         ) : (
-          <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          <div className="w-100 h-100 d-flex justify-content-center align-items-center mt-5">
             <FlapperSpinner size={30} color="#5A2675" loading={true} />
             &nbsp;&nbsp;&nbsp;&nbsp;<h5 className="text-muted">Loading...</h5>
           </div>

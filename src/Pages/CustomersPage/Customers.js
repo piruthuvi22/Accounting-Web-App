@@ -139,7 +139,7 @@ const CustomersPage = () => {
         </div>
       </div>
 
-      <div className="m-3 mt-5 overflow-auto" >
+      <div className="m-3 mt-1 overflow-auto" >
         {isLoaded ? (
           data.length > 0 ? (
             <table className="table table-hover">
@@ -170,7 +170,7 @@ const CustomersPage = () => {
             </div>
           )
         ) : (
-          <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          <div className="w-100 h-100 d-flex justify-content-center align-items-center mt-5">
             <FlapperSpinner size={30} color="#5A2675" loading={true} />
             &nbsp;&nbsp;&nbsp;&nbsp;<h5 className="text-muted">Loading...</h5>
           </div>

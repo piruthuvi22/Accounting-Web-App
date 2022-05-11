@@ -51,7 +51,9 @@ const SuppliersPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(`https://accouting-uom.herokuapp.com/suppliers/delete-supplier/${id}`)
+              .delete(
+                `https://accouting-uom.herokuapp.com/suppliers/delete-supplier/${id}`
+              )
               .then((response) => {
                 console.log(response);
                 getSuppliers();
@@ -139,9 +141,9 @@ const SuppliersPage = () => {
         </div>
       </div>
 
-      <div className="m-3 mt-1 overflow-auto" >
-        {isLoaded ? (
-          data.length > 0 ? (
+      {isLoaded ? (
+        data.length > 0 ? (
+          <div className="m-3 mt-1 overflow-auto">
             <table className="table table-hover">
               <thead>
                 <tr>
@@ -155,27 +157,27 @@ const SuppliersPage = () => {
               </thead>
               <tbody>{renderTable()}</tbody>
             </table>
-          ) : (
-            <div className="text-center">
-              <h2 className="text-muted">No Suppliers found</h2>
-              <lord-icon
-                src="https://cdn.lordicon.com/biwxmlnf.json"
-                trigger="loop"
-                delay="800"
-                colors="primary:#9D72B3"
-                scale="45"
-                state="hover-1"
-                style={{ width: "250px", height: "250px", opacity: "1" }}
-              ></lord-icon>
-            </div>
-          )
-        ) : (
-          <div className="w-100 h-100 d-flex justify-content-center align-items-center mt-5">
-            <FlapperSpinner size={30} color="#5A2675" loading={true} />
-            &nbsp;&nbsp;&nbsp;&nbsp;<h5 className="text-muted">Loading...</h5>
           </div>
-        )}
-      </div>
+        ) : (
+          <div className="text-center">
+            <h2 className="text-muted">No Suppliers found</h2>
+            <lord-icon
+              src="https://cdn.lordicon.com/biwxmlnf.json"
+              trigger="loop"
+              delay="800"
+              colors="primary:#9D72B3"
+              scale="45"
+              state="hover-1"
+              style={{ width: "250px", height: "250px", opacity: "1" }}
+            ></lord-icon>
+          </div>
+        )
+      ) : (
+        <div className="w-100 h-100 d-flex justify-content-center align-items-center mt-5">
+          <FlapperSpinner size={30} color="#5A2675" loading={true} />
+          &nbsp;&nbsp;&nbsp;&nbsp;<h5 className="text-muted">Loading...</h5>
+        </div>
+      )}
     </>
   );
 };

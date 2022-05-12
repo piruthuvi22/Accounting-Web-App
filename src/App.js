@@ -7,9 +7,9 @@ import NavBar from "./components/NavBar";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Products from "./Pages/Products/Products";
+import Products from "./Pages/Products";
 import CustomersPage from "./Pages/Customers";
-import SuppliersPage from "./Pages/SuppliersPage/Suppliers";
+import SuppliersPage from "./Pages/Suppliers";
 import Dashboard from "./Pages/Dashboard";
 import PurchasesPage from "./Pages/Purchases";
 import SalesPage from "./Pages/Sales";

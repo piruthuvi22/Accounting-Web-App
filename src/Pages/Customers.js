@@ -5,23 +5,23 @@ import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
-import JsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import SalesForm from "../../components/SalesForm/SalesForm";
 
+import CustomersForm from "../components/CustomersForm";
+
+import "./customers.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-const SalesPage = () => {
+const CustomersPage = () => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    getSales();
+    getCustomers();
   }, []);
 
-  const getSales = () => {
+  const getCustomers = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/sales/get-sales")
+      .get("https://accouting-uom.herokuapp.com/customers/get-customers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -52,11 +52,11 @@ const SalesPage = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/sales/delete-sale/${id}`
+                `https://accouting-uom.herokuapp.com/customers/delete-customer/${id}`
               )
               .then((response) => {
                 console.log(response);
-                getSales();
+                getCustomers();
               })
               .catch((error) => {
                 console.log(error);
@@ -79,28 +79,18 @@ const SalesPage = () => {
     });
   };
   const renderTable = () => {
-    let totalAmount = 0;
-    return data.reverse().map((sale, i) => {
-      totalAmount += parseFloat(sale.Value);
+    return data.reverse().map((customer, i) => {
       return (
-        <tr key={sale._id}>
-          <th scope="row">
-            {/* {sale._id} */}
-            {sale._id.substr(0, 5) + "..." + sale._id.substr(19)}
-          </th>
-          <td>{sale.Date.substr(0, 10)}</td>
-          <td>{sale.Customer}</td>
-          <td>{sale.Description}</td>
-          <td>{sale.Quantity}</td>
-          <td>{sale.UnitPrice}</td>
-          <td>{sale.Value}</td>
-          <td className="fw-bold h4 text-success p-0 text-decoration-underline">
-            {data.length - 1 == i && totalAmount + " LKR"}
-          </td>
+        <tr key={customer._id}>
+          <th scope="row">{customer._id}</th>
+          <td>{customer.Name}</td>
+          <td>{customer.Email}</td>
+          <td>{customer.Address}</td>
+          <td>{customer.PhoneNo}</td>
           <td className="text-danger">
             {/* <u 
               className="edit text-primary"
-                onClick={() => handleEdit(sale._id)}
+                onClick={() => handleEdit(customer._id)}
             >
               Edit
             </u> */}
@@ -111,7 +101,7 @@ const SalesPage = () => {
                 width="26"
                 height="26"
                 className="text-danger"
-                onClick={() => handleDelete(sale._id)}
+                onClick={() => handleDelete(customer._id)}
                 style={{ cursor: "pointer" }}
               />
             </span>
@@ -120,25 +110,7 @@ const SalesPage = () => {
       );
     });
   };
-
-  const handleExportPDF = () => {
-    console.log("pdf");
-
-    // const report = new JsPDF("landscape", "pt", "a2");
-    // report.html(document.querySelector("#report")).then(() => {
-    //   report.save("report.pdf");
-    // });
-
-    // const input = document.getElementById("report");
-    // html2canvas(input).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const pdf = new JsPDF();
-    //   pdf.addImage(imgData, "JPEG", 0, 0);
-    //   // pdf.output('dataurlnewwindow');
-    //   pdf.save("download.pdf");
-    // });
-  };
-  console.log("sales page", data.length);
+  console.log("customer page", data.length);
   return (
     <>
       <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -152,7 +124,7 @@ const SalesPage = () => {
               aria-expanded="false"
               aria-controls="flush-collapseOne"
             >
-              Add New Sale
+              Add Customer
             </button>
             <hr />
           </h2>
@@ -163,7 +135,7 @@ const SalesPage = () => {
             data-bs-parent="#accordionFlushExample"
           >
             <div className="accordion-body">
-              <SalesForm getSales={getSales} />
+              <CustomersForm getCustomers={getCustomers} />
             </div>
           </div>
         </div>
@@ -171,57 +143,24 @@ const SalesPage = () => {
 
       {isLoaded ? (
         data.length > 0 ? (
-          <>
-            <div className="m-3 mt-1 overflow-auto">
-              {/* <div className="d-flex justify-content-end my-1">
-                <button
-                type="button"
-                className="btn btn-outline-danger"
-                onClick={handleExportPDF}
-                >
-                Export
-                </button>
-              </div> */}
-              <div id="report">
-                {/* <h3 className="visualy-hidden text-center">Sales Journal</h3> */}
-                <table className="table table-hover table-bordered">
-                  {/* <caption>Sales Journal</caption> */}
-                  <thead>
-                    <tr>
-                      <th scope="col" rowSpan="2">
-                        #Invoice
-                      </th>
-                      <th scope="col" rowSpan="2">
-                        Date
-                      </th>
-                      <th scope="col" rowSpan="2">
-                        Customer
-                      </th>
-                      <th scope="col" colSpan="4" className="text">
-                        Description of Goods
-                      </th>
-                      <th scope="col" rowSpan="2">
-                        Total Amount
-                      </th>
-                      <th scope="col" rowSpan="2">
-                        Action
-                      </th>
-                    </tr>
-                    <tr>
-                      <th scope="col">Product</th>
-                      <th scope="col">Qty</th>
-                      <th scope="col">Unit Price</th>
-                      <th scope="col">Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>{renderTable()}</tbody>
-                </table>
-              </div>
-            </div>
-          </>
+          <div className="m-3 mt-1 overflow-auto">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Customer Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">TP No</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>{renderTable()}</tbody>
+            </table>
+          </div>
         ) : (
           <div className="text-center">
-            <h2 className="text-muted">No Sales found</h2>
+            <h2 className="text-muted">No Customers found</h2>
             <lord-icon
               src="https://cdn.lordicon.com/biwxmlnf.json"
               trigger="loop"
@@ -243,4 +182,4 @@ const SalesPage = () => {
   );
 };
 
-export default SalesPage;
+export default CustomersPage;

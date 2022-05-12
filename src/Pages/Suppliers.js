@@ -6,22 +6,22 @@ import { Icon } from "@iconify/react";
 import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
 
-import CustomersForm from "../../components/CustomersForm/CustomersForm";
+import SuppliersForm from "../../components/SuppliersForm";
 
-import "./customers.css";
+import "./suppliers.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-const CustomersPage = () => {
+const SuppliersPage = () => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    getCustomers();
+    getSuppliers();
   }, []);
 
-  const getCustomers = () => {
+  const getSuppliers = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/customers/get-customers")
+      .get("https://accouting-uom.herokuapp.com/suppliers/get-suppliers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -52,11 +52,11 @@ const CustomersPage = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/customers/delete-customer/${id}`
+                `https://accouting-uom.herokuapp.com/suppliers/delete-supplier/${id}`
               )
               .then((response) => {
                 console.log(response);
-                getCustomers();
+                getSuppliers();
               })
               .catch((error) => {
                 console.log(error);
@@ -79,18 +79,18 @@ const CustomersPage = () => {
     });
   };
   const renderTable = () => {
-    return data.reverse().map((customer, i) => {
+    return data.reverse().map((supplier, i) => {
       return (
-        <tr key={customer._id}>
-          <th scope="row">{customer._id}</th>
-          <td>{customer.Name}</td>
-          <td>{customer.Email}</td>
-          <td>{customer.Address}</td>
-          <td>{customer.PhoneNo}</td>
+        <tr key={supplier._id}>
+          <th scope="row">{supplier._id}</th>
+          <td>{supplier.Name}</td>
+          <td>{supplier.Email}</td>
+          <td>{supplier.Address}</td>
+          <td>{supplier.PhoneNo}</td>
           <td className="text-danger">
             {/* <u 
               className="edit text-primary"
-                onClick={() => handleEdit(customer._id)}
+                onClick={() => handleEdit(supplier._id)}
             >
               Edit
             </u> */}
@@ -101,7 +101,7 @@ const CustomersPage = () => {
                 width="26"
                 height="26"
                 className="text-danger"
-                onClick={() => handleDelete(customer._id)}
+                onClick={() => handleDelete(supplier._id)}
                 style={{ cursor: "pointer" }}
               />
             </span>
@@ -124,7 +124,7 @@ const CustomersPage = () => {
               aria-expanded="false"
               aria-controls="flush-collapseOne"
             >
-              Add Customer
+              Add Supplier
             </button>
             <hr />
           </h2>
@@ -135,7 +135,7 @@ const CustomersPage = () => {
             data-bs-parent="#accordionFlushExample"
           >
             <div className="accordion-body">
-              <CustomersForm getCustomers={getCustomers} />
+              <SuppliersForm getSuppliers={getSuppliers} />
             </div>
           </div>
         </div>
@@ -148,7 +148,7 @@ const CustomersPage = () => {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Customer Name</th>
+                  <th scope="col">Supplier Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Address</th>
                   <th scope="col">TP No</th>
@@ -160,7 +160,7 @@ const CustomersPage = () => {
           </div>
         ) : (
           <div className="text-center">
-            <h2 className="text-muted">No Customers found</h2>
+            <h2 className="text-muted">No Suppliers found</h2>
             <lord-icon
               src="https://cdn.lordicon.com/biwxmlnf.json"
               trigger="loop"
@@ -182,4 +182,4 @@ const CustomersPage = () => {
   );
 };
 
-export default CustomersPage;
+export default SuppliersPage;

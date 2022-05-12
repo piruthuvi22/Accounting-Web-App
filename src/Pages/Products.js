@@ -3,25 +3,25 @@ import axios from "axios";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
-import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
 
-import SuppliersForm from "../../components/SuppliersForm/SuppliersForm";
+import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
+import ProductsForm from "../../components/ProductsForm";
 
-import "./suppliers.css";
+import "./products.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-const SuppliersPage = () => {
+const Products = () => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    getSuppliers();
+    getProducts();
   }, []);
 
-  const getSuppliers = () => {
+  const getProducts = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/suppliers/get-suppliers")
+      .get("https://accouting-uom.herokuapp.com/products/get-products")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -29,6 +29,7 @@ const SuppliersPage = () => {
       .catch((error) => {
         console.log(error);
         setIsLoaded(true);
+
         toast.error("Something went wrong!", {
           position: "top-right",
           autoClose: 4000,
@@ -52,11 +53,11 @@ const SuppliersPage = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/suppliers/delete-supplier/${id}`
+                `https://accouting-uom.herokuapp.com/products/delete-product/${id}`
               )
               .then((response) => {
                 console.log(response);
-                getSuppliers();
+                getProducts();
               })
               .catch((error) => {
                 console.log(error);
@@ -79,18 +80,18 @@ const SuppliersPage = () => {
     });
   };
   const renderTable = () => {
-    return data.reverse().map((supplier, i) => {
+    return data.reverse().map((product, i) => {
       return (
-        <tr key={supplier._id}>
-          <th scope="row">{supplier._id}</th>
-          <td>{supplier.Name}</td>
-          <td>{supplier.Email}</td>
-          <td>{supplier.Address}</td>
-          <td>{supplier.PhoneNo}</td>
+        <tr key={product._id}>
+          <th scope="row">{product._id}</th>
+          <td>{product.Product}</td>
+          <td>{product.Date}</td>
+          <td>{product.Supplier}</td>
+          <td>{product.UnitPrice}</td>
           <td className="text-danger">
             {/* <u 
               className="edit text-primary"
-                onClick={() => handleEdit(supplier._id)}
+                onClick={() => handleEdit(product._id)}
             >
               Edit
             </u> */}
@@ -101,7 +102,7 @@ const SuppliersPage = () => {
                 width="26"
                 height="26"
                 className="text-danger"
-                onClick={() => handleDelete(supplier._id)}
+                onClick={() => handleDelete(product._id)}
                 style={{ cursor: "pointer" }}
               />
             </span>
@@ -110,7 +111,7 @@ const SuppliersPage = () => {
       );
     });
   };
-  console.log("customer page", data.length);
+  console.log("Product page", data.length);
   return (
     <>
       <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -124,7 +125,7 @@ const SuppliersPage = () => {
               aria-expanded="false"
               aria-controls="flush-collapseOne"
             >
-              Add Supplier
+              Add Products
             </button>
             <hr />
           </h2>
@@ -135,7 +136,7 @@ const SuppliersPage = () => {
             data-bs-parent="#accordionFlushExample"
           >
             <div className="accordion-body">
-              <SuppliersForm getSuppliers={getSuppliers} />
+              <ProductsForm getProducts={getProducts} />
             </div>
           </div>
         </div>
@@ -143,15 +144,15 @@ const SuppliersPage = () => {
 
       {isLoaded ? (
         data.length > 0 ? (
-          <div className="m-3 mt-1 overflow-auto">
+          <div className="m-3 mt-1 h-100 overflow-auto">
             <table className="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Supplier Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">TP No</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Supplier</th>
+                  <th scope="col">Unit Price</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -160,7 +161,7 @@ const SuppliersPage = () => {
           </div>
         ) : (
           <div className="text-center">
-            <h2 className="text-muted">No Suppliers found</h2>
+            <h2 className="text-muted">No Products found</h2>
             <lord-icon
               src="https://cdn.lordicon.com/biwxmlnf.json"
               trigger="loop"
@@ -182,4 +183,4 @@ const SuppliersPage = () => {
   );
 };
 
-export default SuppliersPage;
+export default Products;

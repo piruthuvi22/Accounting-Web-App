@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
 
-import PurchaseForm from "../../components/PurchasesForm/PurchasesForm";
+import PurchaseForm from "../components/PurchasesForm";
 
 import "./purchases.css";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css

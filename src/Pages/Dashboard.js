@@ -1,7 +1,7 @@
 import React from "react";
 
-import SalesGraph from "../../components/SalesGraph";
-import PurchaseGraph from "../../components/PurchaseGraph";
+import SalesGraph from "../components/SalesGraph";
+import PurchaseGraph from "../components/PurchaseGraph";
 
 const DashboardPage = () => {
   return (

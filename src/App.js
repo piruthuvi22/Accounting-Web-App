@@ -3,16 +3,16 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/NavBar";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Products from "./Pages/Products/Products";
-import CustomersPage from "./Pages/CustomersPage/Customers";
+import CustomersPage from "./Pages/Customers";
 import SuppliersPage from "./Pages/SuppliersPage/Suppliers";
-import Dashboard from "./Pages/DashboardPage/Dashboard";
-import PurchasesPage from "./Pages/PurchasesPage/Purchases";
-import SalesPage from "./Pages/SalesPage/Sales";
+import Dashboard from "./Pages/Dashboard";
+import PurchasesPage from "./Pages/Purchases";
+import SalesPage from "./Pages/Sales";
 
 function App() {
   return (

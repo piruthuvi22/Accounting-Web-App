@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import Card from "./Card/Card";
+import Card from "./Card";
 import axios from "axios";
 
 ChartJS.register(

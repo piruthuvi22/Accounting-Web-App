@@ -218,7 +218,7 @@ const CustomersPage = () => {
                     icon={outlineSaveAs}
                     width="26"
                     height="26"
-                    className="text-danger"
+                    className="text-success"
                     onClick={() => handleUpdate(customer._id)}
                     style={{ cursor: "pointer" }}
                   />

@@ -218,7 +218,7 @@ const SuppliersPage = () => {
                     icon={outlineSaveAs}
                     width="26"
                     height="26"
-                    className="text-danger"
+                    className="text-success"
                     onClick={() => handleUpdate(supplier._id)}
                     style={{ cursor: "pointer" }}
                   />

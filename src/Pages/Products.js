@@ -21,7 +21,7 @@ const Products = () => {
 
   const getProducts = () => {
     axios
-      .get("http://localhost:5000/products/get-products")
+      .get(process.env.REACT_APP_API + "/products/get-products")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -53,7 +53,7 @@ const Products = () => {
           onClick: () => {
             axios
               .delete(
-                `http://localhost:5000/products/delete-product/${id}`
+                `${process.env.REACT_APP_API}/products/delete-product/${id}`
               )
               .then((response) => {
                 console.log(response);

@@ -13,7 +13,7 @@ const ProductsForm = ({ getProducts }) => {
   useEffect(() => {
     console.log("product form");
     axios
-      .get(`http://localhost:5000/suppliers/get-suppliers`)
+      .get(`${process.env.REACT_APP_API}/suppliers/get-suppliers`)
       .then((response) => {
         setSuppliers(response.data);
       })
@@ -49,7 +49,7 @@ const ProductsForm = ({ getProducts }) => {
       UnitPrice: unitPrice,
     };
     axios
-      .post("http://localhost:5000/products/add-product", payload, {
+      .post(process.env.REACT_APP_API + "/products/add-product", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

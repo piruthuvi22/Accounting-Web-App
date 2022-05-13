@@ -31,7 +31,7 @@ const CustomersPage = () => {
 
   const getCustomers = () => {
     axios
-      .get("http://localhost:5000/customers/get-customers")
+      .get(process.env.REACT_APP_API + "/customers/get-customers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -62,7 +62,7 @@ const CustomersPage = () => {
           onClick: () => {
             axios
               .delete(
-                `http://localhost:5000/customers/delete-customer/${id}`
+                `${process.env.REACT_APP_API}/customers/delete-customer/${id}`
               )
               .then((response) => {
                 console.log(response);
@@ -113,7 +113,7 @@ const CustomersPage = () => {
     };
     axios
       .put(
-        "http://localhost:5000/customers/update-customer/" + rowID,
+        process.env.REACT_APP_API + "/customers/update-customer/" + rowID,
         payload,
         {
           headers: {

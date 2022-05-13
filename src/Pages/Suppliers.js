@@ -31,7 +31,7 @@ const SuppliersPage = () => {
 
   const getSuppliers = () => {
     axios
-      .get("http://localhost:5000/suppliers/get-suppliers")
+      .get(process.env.REACT_APP_API + "/suppliers/get-suppliers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -62,7 +62,7 @@ const SuppliersPage = () => {
           onClick: () => {
             axios
               .delete(
-                `http://localhost:5000/suppliers/delete-supplier/${id}`
+                `${process.env.REACT_APP_API}/suppliers/delete-supplier/${id}`
               )
               .then((response) => {
                 console.log(response);
@@ -113,7 +113,7 @@ const SuppliersPage = () => {
     };
     axios
       .put(
-        "http://localhost:5000/suppliers/update-supplier/" + rowID,
+        process.env.REACT_APP_API + "/suppliers/update-supplier/" + rowID,
         payload,
         {
           headers: {

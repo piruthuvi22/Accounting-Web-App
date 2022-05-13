@@ -38,7 +38,7 @@ const CustomersForm = ({ getCustomers }) => {
       PhoneNo: phoneNo,
     };
     axios
-      .post("http://localhost:5000/customers/add-customer", payload, {
+      .post(process.env.REACT_APP_API+"/customers/add-customer", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

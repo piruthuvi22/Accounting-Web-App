@@ -21,7 +21,7 @@ const PurchasesPage = () => {
 
   const getPurchases = () => {
     axios
-      .get("http://localhost:5000/purchases/get-purchases")
+      .get(process.env.REACT_APP_API + "/purchases/get-purchases")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -52,7 +52,7 @@ const PurchasesPage = () => {
           onClick: () => {
             axios
               .delete(
-                `http://localhost:5000/purchases/delete-purchase/${id}`
+                `${process.env.REACT_APP_API}/purchases/delete-purchase/${id}`
               )
               .then((response) => {
                 console.log(response);

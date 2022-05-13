@@ -38,7 +38,7 @@ const SuppliersForm = ({ getSuppliers }) => {
       PhoneNo: phoneNo,
     };
     axios
-      .post("http://localhost:5000/suppliers/add-supplier", payload, {
+      .post(process.env.REACT_APP_API + "/suppliers/add-supplier", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

@@ -42,7 +42,7 @@ const SalesGraph = () => {
   useEffect(() => {
     console.log("1st useEffec");
     axios
-      .get("http://localhost:5000/sales/get-sales")
+      .get(process.env.REACT_APP_API + "/sales/get-sales")
       .then((response) => {
         setData(response.data);
       })

@@ -47,7 +47,7 @@ const PurchaseGraph = () => {
   useEffect(() => {
     console.log("1st useEffec");
     axios
-      .get("http://localhost:5000/purchases/get-purchases")
+      .get(process.env.REACT_APP_API + "/purchases/get-purchases")
       .then((response) => {
         setData(response.data);
       })

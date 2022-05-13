@@ -15,7 +15,7 @@ const PurchaseForm = ({ getPurchases }) => {
   useEffect(() => {
     console.log("purchases form");
     axios
-      .get(`http://localhost:5000/suppliers/get-suppliers`)
+      .get(`${process.env.REACT_APP_API}/suppliers/get-suppliers`)
       .then((response) => {
         setSuppliers(response.data);
       })
@@ -36,7 +36,7 @@ const PurchaseForm = ({ getPurchases }) => {
       )[0].Name;
       console.log(suppName);
     axios
-      .get(`http://localhost:5000/products/get-supplier-data/${e.target.value}`)
+      .get(`${process.env.REACT_APP_API}/products/get-supplier-data/${e.target.value}`)
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
@@ -52,7 +52,7 @@ const PurchaseForm = ({ getPurchases }) => {
     console.log(e.target.value);
     axios
       .get(
-        `http://localhost:5000/products/get-product-data/${e.target.value}`
+        `${process.env.REACT_APP_API}/products/get-product-data/${e.target.value}`
       )
       .then((response) => {
         console.log(response.data);
@@ -85,7 +85,7 @@ const PurchaseForm = ({ getPurchases }) => {
     };
     axios
       .post(
-        "http://localhost:5000/purchases/add-purchase",
+        process.env.REACT_APP_API+"/purchases/add-purchase",
         payload,
         {
           headers: {

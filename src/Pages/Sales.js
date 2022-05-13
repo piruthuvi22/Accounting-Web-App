@@ -21,7 +21,7 @@ const SalesPage = () => {
 
   const getSales = () => {
     axios
-      .get("http://localhost:5000/sales/get-sales")
+      .get(process.env.REACT_APP_API + "/sales/get-sales")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -51,9 +51,7 @@ const SalesPage = () => {
           label: "Yes Sure",
           onClick: () => {
             axios
-              .delete(
-                `http://localhost:5000/sales/delete-sale/${id}`
-              )
+              .delete(`${process.env.REACT_APP_API}/sales/delete-sale/${id}`)
               .then((response) => {
                 console.log(response);
                 getSales();

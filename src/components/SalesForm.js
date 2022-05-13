@@ -17,7 +17,7 @@ const SalesForm = ({ getSales }) => {
   useEffect(() => {
     console.log("Sales form");
     axios
-      .get(`http://localhost:5000/customers/get-customers`)
+      .get(`${process.env.REACT_APP_API}/customers/get-customers`)
       .then((response) => {
         setCustomers(response.data);
       })
@@ -26,7 +26,7 @@ const SalesForm = ({ getSales }) => {
       });
 
     axios
-      .get(`http://localhost:5000/suppliers/get-suppliers`)
+      .get(`${process.env.REACT_APP_API}/suppliers/get-suppliers`)
       .then((response) => {
         setSuppliers(response.data);
       })
@@ -45,7 +45,7 @@ const SalesForm = ({ getSales }) => {
     console.log(supID);
     setUnitPrice("");
     axios
-      .get(`http://localhost:5000/products/get-supplier-data/${supID}`)
+      .get(`${process.env.REACT_APP_API}/products/get-supplier-data/${supID}`)
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
@@ -64,7 +64,7 @@ const SalesForm = ({ getSales }) => {
   const handleProductChange = (e) => {
     console.log(e.target.value);
     axios
-      .get(`http://localhost:5000/products/get-product-data/${e.target.value}`)
+      .get(`${process.env.REACT_APP_API}/products/get-product-data/${e.target.value}`)
       .then((response) => {
         console.log(response.data);
         setUnitPrice(response.data[0].UnitPrice);
@@ -97,7 +97,7 @@ const SalesForm = ({ getSales }) => {
       // TotalValue: req_body.TotalValue,
     };
     axios
-      .post("http://localhost:5000/sales/add-sale", payload, {
+      .post(process.env.REACT_APP_API+"/sales/add-sale", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },

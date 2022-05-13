@@ -21,7 +21,7 @@ const SalesPage = () => {
 
   const getSales = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/sales/get-sales")
+      .get("http://localhost:5000/sales/get-sales")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -52,7 +52,7 @@ const SalesPage = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/sales/delete-sale/${id}`
+                `http://localhost:5000/sales/delete-sale/${id}`
               )
               .then((response) => {
                 console.log(response);

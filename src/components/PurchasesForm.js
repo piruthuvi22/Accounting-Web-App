@@ -15,7 +15,7 @@ const PurchaseForm = ({ getPurchases }) => {
   useEffect(() => {
     console.log("purchases form");
     axios
-      .get(`https://accouting-uom.herokuapp.com/suppliers/get-suppliers`)
+      .get(`http://localhost:5000/suppliers/get-suppliers`)
       .then((response) => {
         setSuppliers(response.data);
       })
@@ -30,12 +30,13 @@ const PurchaseForm = ({ getPurchases }) => {
   };
 
   const handleSupplierChange = (e) => {
-    console.log(e.target.value);
     setUnitPrice("");
+    let suppName = suppliers.filter(
+      (supplier) => supplier._id == e.target.value
+      )[0].Name;
+      console.log(suppName);
     axios
-      .get(
-        `https://accouting-uom.herokuapp.com/products/get-supplier-data/${e.target.value}`
-      )
+      .get(`http://localhost:5000/products/get-supplier-data/${e.target.value}`)
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
@@ -50,7 +51,9 @@ const PurchaseForm = ({ getPurchases }) => {
   const handleProductChange = (e) => {
     console.log(e.target.value);
     axios
-      .get(`https://accouting-uom.herokuapp.com/products/get-product-data/${e.target.value}`)
+      .get(
+        `http://localhost:5000/products/get-product-data/${e.target.value}`
+      )
       .then((response) => {
         console.log(response.data);
         setUnitPrice(response.data[0].UnitPrice);
@@ -72,7 +75,8 @@ const PurchaseForm = ({ getPurchases }) => {
     let totalVal = qty * unitPrice;
     let payload = {
       Date: date,
-      Supplier: supplier,
+      SupplierID: supplier,
+      Supplier: suppliers.filter((c) => c._id == supplier)[0].Name,
       Description: productName,
       Quantity: qty,
       UnitPrice: unitPrice,
@@ -80,11 +84,15 @@ const PurchaseForm = ({ getPurchases }) => {
       // TotalValue: req_body.TotalValue,
     };
     axios
-      .post("https://accouting-uom.herokuapp.com/purchases/add-purchase", payload, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
+      .post(
+        "http://localhost:5000/purchases/add-purchase",
+        payload,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
       .then((res) => {
         getPurchases();
 
@@ -135,7 +143,7 @@ const PurchaseForm = ({ getPurchases }) => {
           >
             <option defaultChecked>Choose...</option>
             {suppliers.map((supplier) => (
-              <option key={supplier._id} value={supplier.Name}>
+              <option key={supplier._id} value={supplier._id}>
                 {supplier.Name}
               </option>
             ))}

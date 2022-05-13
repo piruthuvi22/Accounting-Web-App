@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import { FlapperSpinner } from "react-spinners-kit";
+import outlineModeEditOutline from "@iconify/icons-ic/outline-mode-edit-outline";
+import sharpDoNotDisturbAlt from "@iconify/icons-ic/sharp-do-not-disturb-alt";
+import outlineSaveAs from "@iconify/icons-ic/outline-save-as";
 
 import SuppliersForm from "../components/SuppliersForm";
 
@@ -14,6 +17,13 @@ import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 const SuppliersPage = () => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [rowID, setRowID] = useState();
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
 
   useEffect(() => {
     getSuppliers();
@@ -21,7 +31,7 @@ const SuppliersPage = () => {
 
   const getSuppliers = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/suppliers/get-suppliers")
+      .get("http://localhost:5000/suppliers/get-suppliers")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -52,7 +62,7 @@ const SuppliersPage = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/suppliers/delete-supplier/${id}`
+                `http://localhost:5000/suppliers/delete-supplier/${id}`
               )
               .then((response) => {
                 console.log(response);
@@ -78,39 +88,197 @@ const SuppliersPage = () => {
       overlayClassName: "overlay-custom-class-name", // Custom overlay class name
     });
   };
-  const renderTable = () => {
-    return data.reverse().map((supplier, i) => {
-      return (
-        <tr key={supplier._id}>
-          <th scope="row">{supplier._id}</th>
-          <td>{supplier.Name}</td>
-          <td>{supplier.Email}</td>
-          <td>{supplier.Address}</td>
-          <td>{supplier.PhoneNo}</td>
-          <td className="text-danger">
-            {/* <u 
-              className="edit text-primary"
-                onClick={() => handleEdit(supplier._id)}
-            >
-              Edit
-            </u> */}
-            {/* &nbsp;&nbsp; */}
-            <span>
-              <Icon
-                icon={outlineDeleteOutline}
-                width="26"
-                height="26"
-                className="text-danger"
-                onClick={() => handleDelete(supplier._id)}
-                style={{ cursor: "pointer" }}
-              />
-            </span>
-          </td>
-        </tr>
-      );
-    });
+
+  const handleEdit = (suppplier) => {
+    setName(suppplier.Name);
+    setEmail(suppplier.Email);
+    setAddress(suppplier.Address);
+    setPhoneNo(suppplier.PhoneNo);
+
+    setIsEditMode(!isEditMode);
+    setRowID(suppplier._id);
+    console.log("handleEdit", suppplier);
   };
-  console.log("customer page", data.length);
+
+  const handleUpdate = (id) => {
+    console.log("Update data", { rowID, name, email, address, phoneNo });
+    setIsEditMode(false);
+    data.reverse();
+
+    let payload = {
+      Name: name,
+      Email: email,
+      Address: address,
+      PhoneNo: phoneNo,
+    };
+    axios
+      .put(
+        "http://localhost:5000/suppliers/update-supplier/" + rowID,
+        payload,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((res) => {
+        setIsEditMode(false);
+        getSuppliers();
+        setName("");
+        setEmail("");
+        setAddress("");
+        setPhoneNo("");
+        toast.success("Suppplier Updated", {
+          position: "top-right",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: 0,
+        });
+      })
+      .catch((err) => console.error(err));
+  };
+  const renderTable = () => {
+    if (isEditMode == true) {
+      console.log("isEditMode == true");
+      return data.map((supplier, i) => {
+        // rowID == customer._id && isEditMode && setName(customer.Name);
+
+        return (
+          <tr key={supplier._id}>
+            <th scope="row">
+              {supplier._id.substr(0, 3) + "..." + supplier._id.substr(19)}
+            </th>
+            <td>
+              {rowID == supplier._id ? (
+                <input
+                  type="text"
+                  className="form-control shadow-sm  px-2"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              ) : (
+                supplier.Name
+              )}
+            </td>
+            <td>
+              {rowID == supplier._id ? (
+                <input
+                  type="text"
+                  className="form-control shadow-sm  px-2"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              ) : (
+                supplier.Email
+              )}
+            </td>
+            <td>
+              {rowID == supplier._id ? (
+                <input
+                  type="text"
+                  className="form-control shadow-sm  px-2"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              ) : (
+                supplier.Address
+              )}
+            </td>
+            <td>
+              {rowID == supplier._id ? (
+                <input
+                  type="text"
+                  className="form-control shadow-sm  px-2"
+                  value={phoneNo}
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                />
+              ) : (
+                supplier.PhoneNo
+              )}
+            </td>
+            <td>
+              {rowID == supplier._id && isEditMode && (
+                <span>
+                  <Icon
+                    icon={sharpDoNotDisturbAlt}
+                    width="26"
+                    height="26"
+                    className="text-primary"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      data.reverse();
+                      setIsEditMode(!isEditMode);
+                    }}
+                  />
+                  &nbsp;&nbsp;
+                  <Icon
+                    icon={outlineSaveAs}
+                    width="26"
+                    height="26"
+                    className="text-danger"
+                    onClick={() => handleUpdate(supplier._id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                </span>
+              )}
+              &nbsp;&nbsp;
+              <span>
+                <Icon
+                  icon={outlineDeleteOutline}
+                  width="26"
+                  height="26"
+                  className="text-danger"
+                  onClick={() => handleDelete(supplier._id)}
+                  style={{ cursor: "pointer" }}
+                />
+              </span>
+            </td>
+          </tr>
+        );
+      });
+    } else {
+      console.log("isEditMode == false");
+
+      return data.reverse().map((supplier, i) => {
+        return (
+          <tr key={supplier._id}>
+            <th scope="row">{supplier._id}</th>
+            <td>{supplier.Name}</td>
+            <td>{supplier.Email}</td>
+            <td>{supplier.Address}</td>
+            <td>{supplier.PhoneNo}</td>
+            <td>
+              {
+                <Icon
+                  icon={outlineModeEditOutline}
+                  width="26"
+                  height="26"
+                  className="text-primary"
+                  onClick={() => handleEdit(supplier)}
+                  style={{ cursor: "pointer" }}
+                />
+              }
+              &nbsp;&nbsp;
+              <span>
+                <Icon
+                  icon={outlineDeleteOutline}
+                  width="26"
+                  height="26"
+                  className="text-danger"
+                  onClick={() => handleDelete(supplier._id)}
+                  style={{ cursor: "pointer" }}
+                />
+              </span>
+            </td>
+          </tr>
+        );
+      });
+    }
+  };
+  console.log("supplier page", data.length);
   return (
     <>
       <div className="accordion accordion-flush" id="accordionFlushExample">
@@ -160,7 +328,7 @@ const SuppliersPage = () => {
           </div>
         ) : (
           <div className="text-center">
-            <h2 className="text-muted">No Suppliers found</h2>
+            <h2 className="text-muted">No Supplier found</h2>
             <lord-icon
               src="https://cdn.lordicon.com/biwxmlnf.json"
               trigger="loop"

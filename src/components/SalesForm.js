@@ -17,7 +17,7 @@ const SalesForm = ({ getSales }) => {
   useEffect(() => {
     console.log("Sales form");
     axios
-      .get(`https://accouting-uom.herokuapp.com/customers/get-customers`)
+      .get(`http://localhost:5000/customers/get-customers`)
       .then((response) => {
         setCustomers(response.data);
       })
@@ -26,7 +26,7 @@ const SalesForm = ({ getSales }) => {
       });
 
     axios
-      .get(`https://accouting-uom.herokuapp.com/suppliers/get-suppliers`)
+      .get(`http://localhost:5000/suppliers/get-suppliers`)
       .then((response) => {
         setSuppliers(response.data);
       })
@@ -41,12 +41,11 @@ const SalesForm = ({ getSales }) => {
   };
 
   const handleSupplierChange = (e) => {
-    console.log(e.target.value);
+    let supID = suppliers.filter(sup => sup.Name == e.target.value)[0]._id;
+    console.log(supID);
     setUnitPrice("");
     axios
-      .get(
-        `https://accouting-uom.herokuapp.com/products/get-supplier-data/${e.target.value}`
-      )
+      .get(`http://localhost:5000/products/get-supplier-data/${supID}`)
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
@@ -57,15 +56,15 @@ const SalesForm = ({ getSales }) => {
 
     setSupplier(e.target.value);
   };
-
   const handleCustomerChange = (e) => {
+    console.log(e.target.value);
     setCustomer(e.target.value);
   };
 
   const handleProductChange = (e) => {
     console.log(e.target.value);
     axios
-      .get(`https://accouting-uom.herokuapp.com/products/get-product-data/${e.target.value}`)
+      .get(`http://localhost:5000/products/get-product-data/${e.target.value}`)
       .then((response) => {
         console.log(response.data);
         setUnitPrice(response.data[0].UnitPrice);
@@ -85,10 +84,12 @@ const SalesForm = ({ getSales }) => {
     let productName = products.filter((pro) => pro._id == product)[0]?.Product;
     console.log("productName", productName);
     let totalVal = qty * unitPrice;
+    console.log();
     let payload = {
       Date: date,
-      Customer: customer,
-    //   Supplier: supplier,
+      CustomerID: customer,
+      Customer: customers.filter((c) => c._id == customer)[0].Name,
+      //   Supplier: supplier,
       Description: productName,
       Quantity: qty,
       UnitPrice: unitPrice,
@@ -96,7 +97,7 @@ const SalesForm = ({ getSales }) => {
       // TotalValue: req_body.TotalValue,
     };
     axios
-      .post("https://accouting-uom.herokuapp.com/sales/add-sale", payload, {
+      .post("http://localhost:5000/sales/add-sale", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -152,7 +153,7 @@ const SalesForm = ({ getSales }) => {
           >
             <option defaultChecked>Choose...</option>
             {customers.map((customer) => (
-              <option key={customer._id} value={customer.Name}>
+              <option key={customer._id} value={customer._id}>
                 {customer.Name}
               </option>
             ))}

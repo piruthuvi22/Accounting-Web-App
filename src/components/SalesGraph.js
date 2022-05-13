@@ -42,7 +42,7 @@ const SalesGraph = () => {
   useEffect(() => {
     console.log("1st useEffec");
     axios
-      .get("https://accouting-uom.herokuapp.com/sales/get-sales")
+      .get("http://localhost:5000/sales/get-sales")
       .then((response) => {
         setData(response.data);
       })

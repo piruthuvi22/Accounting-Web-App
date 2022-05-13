@@ -21,7 +21,7 @@ const Products = () => {
 
   const getProducts = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/products/get-products")
+      .get("http://localhost:5000/products/get-products")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -53,7 +53,7 @@ const Products = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/products/delete-product/${id}`
+                `http://localhost:5000/products/delete-product/${id}`
               )
               .then((response) => {
                 console.log(response);

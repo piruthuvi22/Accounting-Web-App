@@ -21,7 +21,7 @@ const PurchasesPage = () => {
 
   const getPurchases = () => {
     axios
-      .get("https://accouting-uom.herokuapp.com/purchases/get-purchases")
+      .get("http://localhost:5000/purchases/get-purchases")
       .then((response) => {
         setData(response.data);
         setIsLoaded(true);
@@ -52,7 +52,7 @@ const PurchasesPage = () => {
           onClick: () => {
             axios
               .delete(
-                `https://accouting-uom.herokuapp.com/purchases/delete-purchase/${id}`
+                `http://localhost:5000/purchases/delete-purchase/${id}`
               )
               .then((response) => {
                 console.log(response);

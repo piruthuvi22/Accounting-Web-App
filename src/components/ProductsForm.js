@@ -13,7 +13,7 @@ const ProductsForm = ({ getProducts }) => {
   useEffect(() => {
     console.log("product form");
     axios
-      .get(`https://accouting-uom.herokuapp.com/suppliers/get-suppliers`)
+      .get(`http://localhost:5000/suppliers/get-suppliers`)
       .then((response) => {
         setSuppliers(response.data);
       })
@@ -28,6 +28,7 @@ const ProductsForm = ({ getProducts }) => {
   };
 
   const handleSupplierChange = (e) => {
+    console.log(e.target.value);
     setSupplier(e.target.value);
   };
 
@@ -42,12 +43,13 @@ const ProductsForm = ({ getProducts }) => {
     e.preventDefault();
     let payload = {
       Date: date,
-      Supplier: supplier,
+      SupplierID: supplier,
+      Supplier: suppliers.filter((sup) => sup._id == supplier)[0].Name,
       Product: product,
       UnitPrice: unitPrice,
     };
     axios
-      .post("https://accouting-uom.herokuapp.com/products/add-product", payload, {
+      .post("http://localhost:5000/products/add-product", payload, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -99,7 +101,9 @@ const ProductsForm = ({ getProducts }) => {
           >
             <option defaultChecked>Choose...</option>
             {suppliers.map((supplier) => (
-              <option key={supplier._id}>{supplier.Name}</option>
+              <option key={supplier._id} value={supplier._id}>
+                {supplier.Name}
+              </option>
             ))}
           </select>
         </div>

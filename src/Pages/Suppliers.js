@@ -245,13 +245,15 @@ const SuppliersPage = () => {
       return data.reverse().map((supplier, i) => {
         return (
           <tr key={supplier._id}>
-            <th>{supplier._id.substr(0, 5) + "..." + supplier._id.substr(19)}</th>
+            <th>
+              {supplier._id.substr(0, 5) + "..." + supplier._id.substr(19)}
+            </th>
             <td>{supplier.Name}</td>
             <td>{supplier.Email}</td>
             <td>{supplier.Address}</td>
             <td>{supplier.PhoneNo}</td>
             <td>
-              {
+              <div className="btn-icons">
                 <Icon
                   icon={outlineModeEditOutline}
                   width="26"
@@ -260,9 +262,7 @@ const SuppliersPage = () => {
                   onClick={() => handleEdit(supplier)}
                   style={{ cursor: "pointer" }}
                 />
-              }
-              &nbsp;&nbsp;
-              <span>
+                &nbsp;&nbsp;
                 <Icon
                   icon={outlineDeleteOutline}
                   width="26"
@@ -271,7 +271,7 @@ const SuppliersPage = () => {
                   onClick={() => handleDelete(supplier._id)}
                   style={{ cursor: "pointer" }}
                 />
-              </span>
+              </div>
             </td>
           </tr>
         );

@@ -253,7 +253,7 @@ const CustomersPage = () => {
             <td>{customer.Address}</td>
             <td>{customer.PhoneNo}</td>
             <td>
-              {
+              <div className="btn-icons">
                 <Icon
                   icon={outlineModeEditOutline}
                   width="26"
@@ -262,9 +262,7 @@ const CustomersPage = () => {
                   onClick={() => handleEdit(customer)}
                   style={{ cursor: "pointer" }}
                 />
-              }
-              &nbsp;&nbsp;
-              <span>
+                &nbsp;&nbsp;
                 <Icon
                   icon={outlineDeleteOutline}
                   width="26"
@@ -273,7 +271,7 @@ const CustomersPage = () => {
                   onClick={() => handleDelete(customer._id)}
                   style={{ cursor: "pointer" }}
                 />
-              </span>
+              </div>
             </td>
           </tr>
         );

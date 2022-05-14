@@ -83,7 +83,7 @@ const Products = () => {
     return data.reverse().map((product, i) => {
       return (
         <tr key={product._id}>
-          <th scope="row">{product._id}</th>
+          <th scope="row">{product._id.substr(0, 5) + "..." + product._id.substr(19)}</th>
           <td>{product.Product}</td>
           <td>{product.Date}</td>
           <td>{product.Supplier}</td>

@@ -200,32 +200,32 @@ const SuppliersPage = () => {
               )}
             </td>
             <td>
-              {rowID == supplier._id && isEditMode && (
-                <span>
-                  <Icon
-                    icon={sharpDoNotDisturbAlt}
-                    width="26"
-                    height="26"
-                    className="text-primary"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      data.reverse();
-                      setIsEditMode(!isEditMode);
-                    }}
-                  />
-                  &nbsp;&nbsp;
-                  <Icon
-                    icon={outlineSaveAs}
-                    width="26"
-                    height="26"
-                    className="text-success"
-                    onClick={() => handleUpdate(supplier._id)}
-                    style={{ cursor: "pointer" }}
-                  />
-                </span>
-              )}
-              &nbsp;&nbsp;
-              <span>
+              <div className="btn-icons">
+                {rowID == supplier._id && isEditMode && (
+                  <>
+                    <Icon
+                      icon={sharpDoNotDisturbAlt}
+                      width="26"
+                      height="26"
+                      className="text-primary"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        data.reverse();
+                        setIsEditMode(!isEditMode);
+                      }}
+                    />
+                    &nbsp;&nbsp;
+                    <Icon
+                      icon={outlineSaveAs}
+                      width="26"
+                      height="26"
+                      className="text-success"
+                      onClick={() => handleUpdate(supplier._id)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </>
+                )}
+                &nbsp;&nbsp;
                 <Icon
                   icon={outlineDeleteOutline}
                   width="26"
@@ -234,7 +234,7 @@ const SuppliersPage = () => {
                   onClick={() => handleDelete(supplier._id)}
                   style={{ cursor: "pointer" }}
                 />
-              </span>
+              </div>
             </td>
           </tr>
         );
@@ -245,7 +245,7 @@ const SuppliersPage = () => {
       return data.reverse().map((supplier, i) => {
         return (
           <tr key={supplier._id}>
-            <th scope="row">{supplier._id}</th>
+            <th>{supplier._id.substr(0, 5) + "..." + supplier._id.substr(19)}</th>
             <td>{supplier.Name}</td>
             <td>{supplier.Email}</td>
             <td>{supplier.Address}</td>
@@ -311,7 +311,7 @@ const SuppliersPage = () => {
 
       {isLoaded ? (
         data.length > 0 ? (
-          <div className="m-3 mt-1 overflow-auto">
+          <div className="m-3 mt-1 table-responsive">
             <table className="table table-hover">
               <thead>
                 <tr>

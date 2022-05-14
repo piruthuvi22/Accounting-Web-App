@@ -200,32 +200,32 @@ const CustomersPage = () => {
               )}
             </td>
             <td>
-              {rowID == customer._id && isEditMode && (
-                <span>
-                  <Icon
-                    icon={sharpDoNotDisturbAlt}
-                    width="26"
-                    height="26"
-                    className="text-primary"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      data.reverse();
-                      setIsEditMode(!isEditMode);
-                    }}
-                  />
-                  &nbsp;&nbsp;
-                  <Icon
-                    icon={outlineSaveAs}
-                    width="26"
-                    height="26"
-                    className="text-success"
-                    onClick={() => handleUpdate(customer._id)}
-                    style={{ cursor: "pointer" }}
-                  />
-                </span>
-              )}
-              &nbsp;&nbsp;
-              <span>
+              <div className="btn-icons">
+                {rowID == customer._id && isEditMode && (
+                  <>
+                    <Icon
+                      icon={sharpDoNotDisturbAlt}
+                      width="26"
+                      height="26"
+                      className="text-primary"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        data.reverse();
+                        setIsEditMode(!isEditMode);
+                      }}
+                    />
+                    &nbsp;&nbsp;
+                    <Icon
+                      icon={outlineSaveAs}
+                      width="26"
+                      height="26"
+                      className="text-success"
+                      onClick={() => handleUpdate(customer._id)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </>
+                )}
+                &nbsp;&nbsp;
                 <Icon
                   icon={outlineDeleteOutline}
                   width="26"
@@ -234,7 +234,7 @@ const CustomersPage = () => {
                   onClick={() => handleDelete(customer._id)}
                   style={{ cursor: "pointer" }}
                 />
-              </span>
+              </div>
             </td>
           </tr>
         );
@@ -245,7 +245,9 @@ const CustomersPage = () => {
       return data.reverse().map((customer, i) => {
         return (
           <tr key={customer._id}>
-            <th scope="row">{customer._id}</th>
+            <th scope="row">
+              {customer._id.substr(0, 5) + "..." + customer._id.substr(19)}
+            </th>
             <td>{customer.Name}</td>
             <td>{customer.Email}</td>
             <td>{customer.Address}</td>

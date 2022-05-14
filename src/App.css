@@ -51,6 +51,15 @@ td {
 .btn-icons {
   display: flex;
 }
+
+.not-found {
+  height: calc(100vh - 122px);
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media screen and (max-width: 768px) {
   .card-img {
     /* display: none; */

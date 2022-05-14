@@ -3,7 +3,7 @@ import axios from "axios";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
-import { FlapperSpinner } from "react-spinners-kit";
+import { StageSpinner } from "react-spinners-kit";
 
 import outlineDeleteOutline from "@iconify/icons-ic/outline-delete-outline";
 import ProductsForm from "../components/ProductsForm";
@@ -160,7 +160,7 @@ const Products = () => {
             </table>
           </div>
         ) : (
-          <div className="text-center">
+          <div className="text-center not-found">
             <h2 className="text-muted">No Products found</h2>
             <lord-icon
               src="https://cdn.lordicon.com/biwxmlnf.json"
@@ -174,9 +174,10 @@ const Products = () => {
           </div>
         )
       ) : (
-        <div className="w-100 h-100 d-flex justify-content-center align-items-center mt-5">
-          <FlapperSpinner size={30} color="#5A2675" loading={true} />
-          &nbsp;&nbsp;&nbsp;&nbsp;<h5 className="text-muted">Loading...</h5>
+        <div className="w-100 not-found mt-5">
+          <StageSpinner size={50} color="#5A2675" loading={true} />
+          <br />
+          {/* <h5 className="text-muted">Loading...</h5> */}
         </div>
       )}
     </>

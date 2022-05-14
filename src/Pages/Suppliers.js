@@ -45,7 +45,7 @@ const SuppliersPage = () => {
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: false,
-          draggable: false,
+          draggable: true,
           progress: 0,
         });
       });
@@ -134,7 +134,7 @@ const SuppliersPage = () => {
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: false,
-          draggable: false,
+          draggable: true,
           progress: 0,
         });
       })

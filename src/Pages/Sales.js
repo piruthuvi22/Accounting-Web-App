@@ -35,7 +35,7 @@ const SalesPage = () => {
           hideProgressBar: false,
           closeOnClick: false,
           pauseOnHover: false,
-          draggable: false,
+          draggable: true,
           progress: 0,
         });
       });

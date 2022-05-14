@@ -34,7 +34,7 @@ function App() {
         newestOnTop
         closeOnClick
         rtl={false}
-        draggable={false}
+        draggable
       />
     </div>
   );

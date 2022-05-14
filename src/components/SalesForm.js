@@ -41,7 +41,7 @@ const SalesForm = ({ getSales }) => {
   };
 
   const handleSupplierChange = (e) => {
-    let supID = suppliers.filter(sup => sup.Name == e.target.value)[0]._id;
+    let supID = suppliers.filter(sup => sup.Name === e.target.value)[0]._id;
     console.log(supID);
     setUnitPrice("");
     axios
@@ -81,14 +81,14 @@ const SalesForm = ({ getSales }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    let productName = products.filter((pro) => pro._id == product)[0]?.Product;
+    let productName = products.filter((pro) => pro._id === product)[0]?.Product;
     console.log("productName", productName);
     let totalVal = qty * unitPrice;
     console.log();
     let payload = {
       Date: date,
       CustomerID: customer,
-      Customer: customers.filter((c) => c._id == customer)[0].Name,
+      Customer: customers.filter((c) => c._id === customer)[0].Name,
       //   Supplier: supplier,
       Description: productName,
       Quantity: qty,

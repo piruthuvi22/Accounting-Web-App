@@ -93,7 +93,7 @@ const SalesPage = () => {
           <td>{sale.UnitPrice}</td>
           <td>{sale.Value}</td>
           <td className="fw-bold h4 text-success p-0 text-decoration-underline">
-            {data.length - 1 == i && totalAmount + " LKR"}
+            {data.length - 1 === i && totalAmount + " LKR"}
           </td>
           <td className="text-danger">
             {/* <u 

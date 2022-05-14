@@ -141,7 +141,7 @@ const CustomersPage = () => {
       .catch((err) => console.error(err));
   };
   const renderTable = () => {
-    if (isEditMode == true) {
+    if (isEditMode === true) {
       console.log("isEditMode == true");
       return data.map((customer, i) => {
         // rowID == customer._id && isEditMode && setName(customer.Name);
@@ -152,7 +152,7 @@ const CustomersPage = () => {
               {customer._id.substr(0, 3) + "..." + customer._id.substr(19)}
             </th>
             <td>
-              {rowID == customer._id ? (
+              {rowID === customer._id ? (
                 <input
                   type="text"
                   className="form-control shadow-sm  px-2"
@@ -164,7 +164,7 @@ const CustomersPage = () => {
               )}
             </td>
             <td>
-              {rowID == customer._id ? (
+              {rowID === customer._id ? (
                 <input
                   type="text"
                   className="form-control shadow-sm  px-2"
@@ -176,7 +176,7 @@ const CustomersPage = () => {
               )}
             </td>
             <td>
-              {rowID == customer._id ? (
+              {rowID === customer._id ? (
                 <input
                   type="text"
                   className="form-control shadow-sm  px-2"
@@ -188,7 +188,7 @@ const CustomersPage = () => {
               )}
             </td>
             <td>
-              {rowID == customer._id ? (
+              {rowID === customer._id ? (
                 <input
                   type="text"
                   className="form-control shadow-sm  px-2"
@@ -201,7 +201,7 @@ const CustomersPage = () => {
             </td>
             <td>
               <div className="btn-icons">
-                {rowID == customer._id && isEditMode && (
+                {rowID === customer._id && isEditMode && (
                   <>
                     <Icon
                       icon={sharpDoNotDisturbAlt}

@@ -95,7 +95,7 @@ const PurchasesPage = () => {
           <td>{purchase.UnitPrice}</td>
           <td>{purchase.Value}</td>
           <td className="fw-bold h4 text-success p-0 text-decoration-underline">
-            {data.length - 1 == i && totalAmount + " LKR"}
+            {data.length - 1 === i && totalAmount + " LKR"}
           </td>
           <td className="text-danger">
             {/* <u 

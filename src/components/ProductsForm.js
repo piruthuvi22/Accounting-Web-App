@@ -44,7 +44,7 @@ const ProductsForm = ({ getProducts }) => {
     let payload = {
       Date: date,
       SupplierID: supplier,
-      Supplier: suppliers.filter((sup) => sup._id == supplier)[0].Name,
+      Supplier: suppliers.filter((sup) => sup._id === supplier)[0].Name,
       Product: product,
       UnitPrice: unitPrice,
     };

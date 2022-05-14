@@ -12,7 +12,7 @@ const Card = ({ totalAmount, type }) => {
       <div className="row m-0 g-0 w-100">
         <div className="col-4 d-flex align-items-center justify-content-center p-0">
           <img
-            src={type == "sales" ? "/sales.svg" : "/purchase.svg"}
+            src={type === "sales" ? "/sales.svg" : "/purchase.svg"}
             className="img-fluid rounded-start card-img p-1"
             alt="..."
           />
